@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodKart - Online Food Delivery</title>
+    <meta name="description" content="Order delicious food online from FoodKart.">
+
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+
+<body>
+
+    <header>
+    <nav class="navbar">
+        <div class="nav-logo"><a href="#" class="logo" id="logoLink">Food<span>Kart</span></a></div>
+        <div class="nav-menu">
+            <ol>
+                <li><a href="#" id="homeLink" class="nav-link active"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="#" id="restaurantLink" class="nav-link"><i class="fa-solid fa-utensils"></i> Restaurants</a></li>
+                <li><a href="#" id="categoryLink" class="nav-link"><i class="fa-solid fa-layer-group"></i> Categories</a></li>
+                <li><a href="#" class="cart-button" id="cartButton"><i class="fa-solid fa-cart-shopping"></i> Cart<span id="cartCount">0</span></a></li>
+                <li><a href="#" class="nav-location" id="navLocationButton"><i class="fa-solid fa-location-dot"></i><span class="nav-location-details"><span class="nav-location-label">Delivering to</span><span class="nav-location-name" id="navLocationText">Select your location</span></span><i class="fa-solid fa-chevron-down"></i></a></li>
+                <li><a href="#" id="profileLink" class="profile-nav"> Profile<i class="fa-solid fa-user"></i></a></li>
+            </ol>
+        </div>
+    </nav>
+</header>
+
+    <!-- HOME PAGE -->
+
+    <main id="homePage">
+
+        <!-- HERO -->
+
+        <section class="hero">
+            <div class="hero-content">
+
+                <span class="hero-tag">🍃 Fresh Food, Happy Life</span>
+
+                <h1>
+                    Delicious Food Delivered
+                    <span>To Your Doorstep</span>
+                </h1>
+
+                <p>
+                    Discover the best restaurants and order your favourite food.
+                </p>
+
+                <div class="search-box">
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search restaurants or food..."
+                        autocomplete="off"
+                    >
+                    <button id="searchButton">Search</button>
+                </div>
+
+                <div class="search-suggestions" id="searchSuggestions"></div>
+
+            </div>
+        </section>
+
+        <!-- CATEGORIES -->
+        
+        <div class="category-content" id="categoriesSection">
+            <h2>Explore Categories</h2>
+            <p>Find your favourite food</p>
+            <div class="category-list">
+                <div class="category-card active" data-category="all">
+                    <div class="category-icon">🍽️</div>
+                    <h3>All</h3>
+                </div>
+                <div class="category-card" data-category="biryani">
+                    <div class="category-icon">🍛</div>
+                    <h3>Biryani</h3>
+                </div>
+                <div class="category-card" data-category="pizza">
+                    <div class="category-icon">🍕</div>
+                    <h3>Pizza</h3>
+                </div>
+                <div class="category-card" data-category="burger">
+                    <div class="category-icon">🍔</div>
+                    <h3>Burger</h3>
+                </div>
+                <div class="category-card" data-category="chicken">
+                    <div class="category-icon">🍗</div>
+                    <h3>Chicken</h3>
+                </div>
+                <div class="category-card" data-category="noodles">
+                    <div class="category-icon">🍜</div>
+                    <h3>Noodles</h3>
+                </div>
+                <div class="category-card" data-category="ice-cream">
+                    <div class="category-icon">🍦</div>
+                    <h3>Ice Cream</h3>
+                </div>
+            </div>
+        </div>
+
+                
+        <!-- OFFERS -->
+
+        <section class="section">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Special Offers</h2>
+                    <p>Enjoy delicious food at great prices</p>
+                </div>
+            </div>
+
+            <div class="offers-grid">
+
+                <div class="offer-card offer-one">
+                    <small>WELCOME OFFER</small>
+                    <h3>50% OFF</h3>
+                    <p>On your first order with FoodKart</p>
+                </div>
+
+                <div class="offer-card offer-two">
+                    <small>WEEKEND SPECIAL</small>
+                    <h3>Free Delivery</h3>
+                    <p>Enjoy free delivery on selected orders</p>
+                </div>
+
+                <div class="offer-card offer-three">
+                    <small>FOODKART DEAL</small>
+                    <h3>Buy 1 Get 1</h3>
+                    <p>Enjoy more food with your friends</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- RESTAURANTS -->
+
+        <section class="section" id="restaurantsSection">
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>Popular Restaurants</h2>
+                    <p>Explore restaurants near you</p>
+                </div>
+
+            </div>
+
+            <div class="restaurant-grid" id="restaurantGrid">
+                <article class="restaurant-card" data-id="paradise" data-name="Paradise Biryani" data-category="biryani chicken"><div class="restaurant-image"><img src="https://t3.ftcdn.net/jpg/08/43/81/98/360_F_843819896_THoshAccGDjP9tNCLCgL3KhOGgRgqkxN.jpg" alt="Biryani"><span class="restaurant-offer">20% OFF</span></div><div class="restaurant-info"><h3>Paradise Biryani</h3><p>Authentic Hyderabadi biryani</p><div class="restaurant-meta"><span>⭐ 4.8</span><span>30-35 min</span></div></div></article>
+                <article class="restaurant-card" data-id="pizza" data-name="Pizza Palace" data-category="pizza"><div class="restaurant-image"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=700" alt="Pizza"><span class="restaurant-offer">15% OFF</span></div><div class="restaurant-info"><h3>Pizza Palace</h3><p>Delicious cheesy pizzas</p><div class="restaurant-meta"><span>⭐ 4.5</span><span>25-30 min</span></div></div></article>
+                <article class="restaurant-card" data-id="burger" data-name="Burger House" data-category="burger chicken"><div class="restaurant-image"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=700" alt="Burger"><span class="restaurant-offer">10% OFF</span></div><div class="restaurant-info"><h3>Burger House</h3><p>Juicy and tasty burgers</p><div class="restaurant-meta"><span>⭐ 4.4</span><span>20-25 min</span></div></div></article>
+                <article class="restaurant-card" data-id="sweet" data-name="Sweet Treats" data-category="dessert ice-cream"><div class="restaurant-image"><img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=700" alt="Dessert"><span class="restaurant-offer">20% OFF</span></div><div class="restaurant-info"><h3>Sweet Treats</h3><p>Sweet desserts and treats</p><div class="restaurant-meta"><span>⭐ 4.6</span><span>15-20 min</span></div></div></article>
+                <article class="restaurant-card" data-id="chicken" data-name="Chicken Corner" data-category="chicken"><div class="restaurant-image"><img src="https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?w=700" alt="Chicken"><span class="restaurant-offer">15% OFF</span></div><div class="restaurant-info"><h3>Chicken Corner</h3><p>Hot and crispy chicken</p><div class="restaurant-meta"><span>⭐ 4.5</span><span>25-30 min</span></div></div></article>
+                <article class="restaurant-card" data-id="royal" data-name="Royal Biryani" data-category="biryani chicken"><div class="restaurant-image"><img src="https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=700" alt="Biryani"><span class="restaurant-offer">25% OFF</span></div><div class="restaurant-info"><h3>Royal Biryani</h3><p>Premium biryani varieties</p><div class="restaurant-meta"><span>⭐ 4.7</span><span>30-35 min</span></div></div></article>
+                <article class="restaurant-card" data-id="south-spice" data-name="South Spice" data-category="biryani"><div class="restaurant-image"><img src="https://images.unsplash.com/photo-1630383249896-424e482df921?w=700" alt="South Indian Food"><span class="restaurant-offer">10% OFF</span></div><div class="restaurant-info"><h3>South Spice</h3><p>Traditional dosa and idli</p><div class="restaurant-meta"><span>⭐ 4.3</span><span>20-25 min</span></div></div></article>
+                <article class="restaurant-card" data-id="chinese-wok" data-name="Chinese Wok" data-category="noodles"><div class="restaurant-image"><img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?w=700" alt="Noodles"><span class="restaurant-offer">20% OFF</span></div><div class="restaurant-info"><h3>Chinese Wok</h3><p>Delicious Chinese cuisine</p><div class="restaurant-meta"><span>⭐ 4.4</span><span>25-30 min</span></div></div></article>
+                <article class="restaurant-card" data-id="rolls-wraps" data-name="Rolls & Wraps" data-category="chicken"><div class="restaurant-image"><img src="https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=700" alt="Rolls"><span class="restaurant-offer">15% OFF</span></div><div class="restaurant-info"><h3>Rolls & Wraps</h3><p>Fresh and flavorful rolls</p><div class="restaurant-meta"><span>⭐ 4.2</span><span>20-25 min</span></div></div></article>
+                <article class="restaurant-card" data-id="kebab-junction" data-name="Kebab Junction" data-category="chicken"><div class="restaurant-image"><img src="https://images.unsplash.com/photo-1529042410759-befb1204b468?w=700" alt="Kebab"><span class="restaurant-offer">20% OFF</span></div><div class="restaurant-info"><h3>Kebab Junction</h3><p>Smoky and spicy kebabs</p><div class="restaurant-meta"><span>⭐ 4.6</span><span>30-35 min</span></div></div></article>
+                <article class="restaurant-card" data-id="coffee-house" data-name="Cafe Coffee House" data-category="dessert"><div class="restaurant-image"><img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=700" alt="Coffee"><span class="restaurant-offer">10% OFF</span></div><div class="restaurant-info"><h3>Cafe Coffee House</h3><p>Coffee, snacks and desserts</p><div class="restaurant-meta"><span>⭐ 4.5</span><span>15-20 min</span></div></div></article>
+                <article class="restaurant-card" data-id="italian-kitchen" data-name="Italian Kitchen" data-category="pizza"><div class="restaurant-image"><img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=700" alt="Italian Food"><span class="restaurant-offer">15% OFF</span></div><div class="restaurant-info"><h3>Italian Kitchen</h3><p>Authentic Italian flavors</p><div class="restaurant-meta"><span>⭐ 4.4</span><span>25-30 min</span></div></div></article>
+                <article class="restaurant-card" data-id="sandwich-station" data-name="Sandwich Station" data-category="burger"><div class="restaurant-image"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf3owNcEZ_f0YFjLraaTOyvsclfTU24DnPAkvTt6uM4Q&s=10" alt="Sandwich"><span class="restaurant-offer">10% OFF</span></div><div class="restaurant-info"><h3>Sandwich Station</h3><p>Freshly made sandwiches</p><div class="restaurant-meta"><span>⭐ 4.3</span><span>15-20 min</span></div></div></article>
+                <article class="restaurant-card" data-id="ocean-seafood" data-name="Ocean Seafood" data-category="chicken"><div class="restaurant-image"><img src="https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=700" alt="Seafood"><span class="restaurant-offer">20% OFF</span></div><div class="restaurant-info"><h3>Ocean Seafood</h3><p>Fresh seafood specialties</p><div class="restaurant-meta"><span>⭐ 4.6</span><span>30-35 min</span></div></div></article>
+                <article class="restaurant-card" data-id="thali-house" data-name="Royal Thali House" data-category="biryani"><div class="restaurant-image"><img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=700" alt="Thali"><span class="restaurant-offer">15% OFF</span></div><div class="restaurant-info"><h3>Royal Thali House</h3><p>Complete Indian meals</p><div class="restaurant-meta"><span>⭐ 4.5</span><span>25-30 min</span></div></div></article>
+                <article class="restaurant-card" data-id="momo-street" data-name="Momo Street" data-category="chicken"><div class="restaurant-image"><img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?w=700" alt="Momos"><span class="restaurant-offer">10% OFF</span></div><div class="restaurant-info"><h3>Momo Street</h3><p>Steamed and fried momos</p><div class="restaurant-meta"><span>⭐ 4.3</span><span>20-25 min</span></div></div></article>
+                <article class="restaurant-card" data-id="shawarma-point" data-name="Shawarma Point" data-category="chicken"><div class="restaurant-image"><img src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=700" alt="Shawarma"><span class="restaurant-offer">20% OFF</span></div><div class="restaurant-info"><h3>Shawarma Point</h3><p>Fresh and spicy shawarma</p><div class="restaurant-meta"><span>⭐ 4.5</span><span>20-25 min</span></div></div></article>
+                <article class="restaurant-card" data-id="fresh-bake" data-name="Fresh Bake Bakery" data-category="ice-cream"><div class="restaurant-image"><img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=700" alt="Bakery"><span class="restaurant-offer">15% OFF</span></div><div class="restaurant-info"><h3>Fresh Bake Bakery</h3><p>Freshly baked cakes and bread</p><div class="restaurant-meta"><span>⭐ 4.4</span><span>15-20 min</span></div></div></article>
+                <article class="restaurant-card" data-id="ice-cream-world" data-name="Ice Cream World" data-category="ice-cream"><div class="restaurant-image"><img src="https://images.immediate.co.uk/production/volatile/sites/30/2021/06/Next-Level_Ice-Cream-3db3bd9.jpg" alt="Ice Cream"><span class="restaurant-offer">25% OFF</span></div><div class="restaurant-info"><h3>Ice Cream World</h3><p>Delicious ice cream flavors</p><div class="restaurant-meta"><span>⭐ 4.7</span><span>15-20 min</span></div></div></article>
+                <article class="restaurant-card" data-id="street-food" data-name="Street Food Hub" data-category="burger chicken"><div class="restaurant-image"><img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=700" alt="Street Food"><span class="restaurant-offer">10% OFF</span></div><div class="restaurant-info"><h3>Street Food Hub</h3><p>Popular street food favorites</p><div class="restaurant-meta"><span>⭐ 4.3</span><span>20-25 min</span></div></div></article>
+                <article class="restaurant-card" data-id="healthy-bowl" data-name="Healthy Bowl" data-category="chicken"><div class="restaurant-image"><img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=700" alt="Healthy Bowl"><span class="restaurant-offer">15% OFF</span></div><div class="restaurant-info"><h3>Healthy Bowl</h3><p>Fresh and healthy meals</p><div class="restaurant-meta"><span>⭐ 4.5</span><span>20-25 min</span></div></div></article>
+                <article class="restaurant-card" data-id="tandoori-house" data-name="Tandoori House" data-category="chicken"><div class="restaurant-image"><img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=700" alt="Tandoori"><span class="restaurant-offer">20% OFF</span></div><div class="restaurant-info"><h3>Tandoori House</h3><p>Authentic tandoori specialties</p><div class="restaurant-meta"><span>⭐ 4.6</span><span>30-35 min</span></div></div></article>
+                <article class="restaurant-card" data-id="noodle-express" data-name="Noodle Express" data-category="noodles"><div class="restaurant-image"><img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=700" alt="Noodles"><span class="restaurant-offer">15% OFF</span></div><div class="restaurant-info"><h3>Noodle Express</h3><p>Hot and flavorful noodles</p><div class="restaurant-meta"><span>⭐ 4.4</span><span>20-25 min</span></div></div></article>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FOODKART LOCATION / MAP SECTION -->
+     
+    <section class="food-location-section" id="foodLocationSection" hidden>
+
+        <div class="location-heading">
+            <span class="location-badge">📍 FOODKART DELIVERY</span>
+            <h2>Find Food Around You</h2>
+            <p>Discover delicious food and restaurants near your location.</p>
+        </div>
+
+        <div class="location-container">
+
+            <div class="location-sidebar">
+
+                <h3>Where are you hungry?</h3>
+
+                <p>Choose your delivery location</p>
+
+                <div class="map-search-box">
+                    <input
+                        type="text"
+                        id="mapSearchInput"
+                        placeholder="Enter your location...">
+
+                    <button id="mapSearchButton">🔍</button>
+                </div>
+
+                <button class="current-location-button" id="currentLocationButton">
+                    📍 Use My Current Location
+                </button>
+
+                <div class="delivery-info-card">
+                    <div class="delivery-icon">🛵</div>
+
+                    <div>
+                        <h4>Fast Delivery</h4>
+                        <p>Fresh food delivered to your doorstep.</p>
+                    </div>
+                </div>
+
+                <div class="delivery-info-card">
+                    <div class="delivery-icon">🍕</div>
+
+                    <div>
+                        <h4>Nearby Restaurants</h4>
+                        <p>Explore restaurants around your location.</p>
+                    </div>
+                </div>
+
+                <div class="selected-location-card">
+                    <span>📌 Selected Location</span>
+                    <h4 id="selectedLocationText">Choose your location</h4>
+                </div>
+
+            </div>
+
+            <div class="food-map-wrapper">
+
+                <div class="map-top-label">
+                    <span>🍔</span>
+                    <span>FoodKart Map</span>
+                    <span class="map-live-badge">Explore</span>
+                </div>
+
+                <div id="foodKartMap"></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- MENU PAGE -->
+
+    <main id="menuPage" class="section" hidden>
+
+        <div class="page-top">
+            <div>
+                <h2 id="menuRestaurantName">Restaurant Menu</h2>
+                <p style="color:var(--muted);margin-top:7px;">
+                    Choose your favourite items
+                </p>
+            </div>
+
+            <button class="back-button" id="backToRestaurants">
+                ← Back to Restaurants
+            </button>
+        </div>
+
+        <div class="menu-grid" id="menuGrid"></div>
+
+    </main>
+
+    <!-- PROFILE PAGE -->
+
+    <main id="profilePage" hidden>
+
+        <div class="profile-container">
+
+            <!-- LOGGED OUT -->
+
+            <div id="guestSection" class="profile-card" hidden>
+
+                <div class="profile-avatar">👤</div>
+
+                <h2>Please Login</h2>
+
+                <p>
+                    Login to view your FoodKart profile details.
+                </p>
+
+                <a href="login.html" class="profile-login-btn">
+                    Login to Continue
+                </a>
+
+                </div>
+
+                <!-- LOGGED IN -->
+
+                <div id="loggedInSection" class="profile-card" hidden>
+
+                    <div class="profile-avatar">👤</div>
+
+                    <h2>My Profile</h2>
+
+                    <p>Your account details</p>
+
+                    <div class="profile-details">
+
+                        <div>
+                            <strong>Full Name</strong>
+                            <p id="displayName"></p>
+                        </div>
+
+                        <div>
+                            <strong>Email Address</strong>
+                            <p id="displayEmail"></p>
+                        </div>
+
+                        <div>
+                            <strong>Phone Number</strong>
+                            <p id="displayPhone"></p>
+                        </div>
+
+                    </div>
+
+                    <button type="button" id="logoutButton" class="logout-button">
+                        Logout
+                    </button>
+
+                </div>
+
+            </div>
+
+        </main>
+
+        <!-- FOOTER -->
+
+        <footer id="mainFooter">
+
+            <div class="footer-content">
+
+                <div>
+                    <h3>FoodKart</h3>
+                    <p>
+                        Your favourite food, delivered fresh to your doorstep.
+                        Discover restaurants and enjoy delicious meals with FoodKart.
+                    </p>
+                </div>
+
+                <div>
+                    <h3>Quick Links</h3>
+                    <div class="footer-links">
+                        <a href="#" id="footerHomeLink">Home</a>
+                        <a href="#" id="footerRestaurantLink">Restaurants</a>
+                        <a href="#" id="footerProfileLink">Profile</a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3>Contact Us</h3>
+                    <p>Email: support@foodkart.com</p>
+                    <p>Phone: +91 9876543210</p>
+                </div>
+
+            </div>
+
+            <div class="copyright">
+                © 2026 FoodKart. All Rights Reserved.
+            </div>
+
+        </footer>
+
+        <!-- CART DRAWER -->
+
+        <!-- CART DRAWER -->
+
+        <div class="cart-overlay" id="cartOverlay"></div>
+
+        <aside class="cart-drawer" id="cartDrawer">
+
+            <div class="cart-header">
+                <h2>🛒 Your Cart</h2>
+                <button class="close-cart" id="closeCart">×</button>
+            </div>
+
+            <div class="cart-items" id="cartItems">
+                <div class="cart-empty">
+                    <div>🛒</div>
+                    <h3>Your cart is empty</h3>
+                    <p>Add delicious food to get started.</p>
+                </div>
+            </div>
+
+            <div class="cart-summary">
+
+                <!-- DELIVERY LOCATION -->
+                <div class="cart-location">
+
+                    <button type="button" id="cartLocationButton" onclick="alert('Button clicked')" >
+                        <i class="fa-solid fa-location-dot"></i>
+                        Select Delivery Location
+                    </button>
+
+                    <div id="cartLocationDisplay" style="display:none;">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <div>
+                            <strong>Delivering to</strong>
+                            <p id="cartAddressText"></p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="bill-row">
+                    <span>Item Total</span>
+                    <strong id="itemTotal">₹0</strong>
+                </div>
+
+                <div class="bill-row">
+                    <span>Delivery Fee</span>
+                    <strong id="deliveryFee">₹0</strong>
+                </div>
+
+                <div class="bill-row">
+                    <span>Platform Fee</span>
+                    <strong id="platformFee">₹0</strong>
+                </div>
+
+                <div class="bill-row bill-total">
+                    <span>To Pay</span>
+                    <strong id="grandTotal">₹0</strong>
+                </div>
+
+                <button class="checkout-button" id="checkoutButton" disabled>
+                    Please Login First
+                </button>
+
+            </div>
+
+        </aside>
+
+        <!-- JAVASCRIPT -->
+
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+        <script src="home.js" defer></script>
+
+
+    </body>
+</html>

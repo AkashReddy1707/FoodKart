@@ -1,0 +1,1017 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodKart - Sign In / Sign Up</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #db3434;
+            --primary-dark: #b92727;
+            --dark: #282c3f;
+            --muted: #686b78;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff8f2;
+            min-height: 100vh;
+        }
+
+        .auth-container {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .auth-left {
+            background: linear-gradient(135deg, #db3434, #db3434);
+            padding: 45px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 30px;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #282c3f;
+        }
+
+        .welcome-content {
+            max-width: 470px;
+            margin: auto;
+        }
+
+        .welcome-content h1 {
+            font-size: 46px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .welcome-content p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #fff3e8;
+        }
+
+        .food-illustration {
+            font-size: 55px;
+            margin-top: 35px;
+        }
+
+        .auth-right {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 35px 20px;
+        }
+
+        .auth-box {
+            width: 100%;
+            max-width: 420px;
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.07);
+        }
+
+        .back-home {
+            display: inline-block;
+            color: var(--primary);
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            margin-bottom: 25px;
+        }
+
+        .auth-tabs {
+            display: flex;
+            background: #f3f3f3;
+            padding: 5px;
+            border-radius: 9px;
+            margin-bottom: 28px;
+        }
+
+        .auth-tabs button {
+            width: 50%;
+            padding: 12px;
+            border: none;
+            border-radius: 7px;
+            font-weight: 700;
+            color: var(--muted);
+            background: transparent;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .auth-tabs button.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .auth-box h2 {
+            color: var(--dark);
+            font-size: 27px;
+            margin-bottom: 7px;
+        }
+
+        .subtitle {
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .auth-box label {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+
+        .auth-box input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            outline: none;
+            margin-bottom: 19px;
+            font-size: 14px;
+        }
+
+        .auth-box input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(219,52,52,0.1);
+        }
+
+        .forgot-link {
+            text-align: right;
+            margin-top: -10px;
+            margin-bottom: 18px;
+        }
+
+        .forgot-link a {
+            color: var(--primary);
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 14px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            margin-top: 5px;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .resend-otp-btn {
+            width: 100%;
+            padding: 13px;
+            margin-top: 12px;
+            background: white;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .resend-otp-btn:hover:not(:disabled) {
+            background: var(--primary);
+            color: white;
+        }
+
+        .resend-otp-btn:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+        }
+
+        .switch-text {
+            text-align: center;
+            color: var(--muted);
+            font-size: 13px;
+            margin-top: 23px;
+        }
+
+        .switch-text a {
+            color: var(--primary);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .error-message {
+            color: #dc2626;
+            background: #fef2f2;
+            padding: 10px;
+            border-radius: 7px;
+            margin-bottom: 15px;
+            font-size: 13px;
+        }
+
+        .success-message {
+            color: #15803d;
+            background: #f0fdf4;
+            padding: 10px;
+            border-radius: 7px;
+            margin-bottom: 15px;
+            font-size: 13px;
+        }
+
+        .otp-info {
+            background: #fff5f5;
+            border: 1px solid #ffe0e0;
+            padding: 13px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #686b78;
+            line-height: 1.7;
+        }
+
+        .otp-info strong {
+            color: var(--dark);
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+
+        @media(max-width: 800px) {
+            .auth-container {
+                grid-template-columns: 1fr;
+            }
+
+            .auth-left {
+                min-height: 230px;
+                padding: 25px;
+            }
+
+            .welcome-content {
+                margin: 30px 0 0;
+            }
+
+            .welcome-content h1 {
+                font-size: 30px;
+            }
+
+            .welcome-content p {
+                font-size: 13px;
+            }
+
+            .food-illustration {
+                font-size: 30px;
+                margin-top: 15px;
+            }
+
+            .auth-right {
+                padding: 30px 15px;
+            }
+        }
+
+        @media(max-width: 400px) {
+            .auth-box {
+                padding: 23px 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="auth-container">
+
+    <!-- LEFT SECTION -->
+
+    <div class="auth-left">
+
+        <a href="home.html" class="logo">
+            Food<span>Kart.</span>
+        </a>
+
+        <div class="welcome-content">
+
+            <h1>Delicious Food,<br>Happy Moments!</h1>
+
+            <p>
+                Discover your favourite restaurants and enjoy
+                delicious meals delivered to your doorstep.
+            </p>
+
+            <div class="food-illustration">
+                🍕 🍔 🍛 🥗
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- RIGHT SECTION -->
+
+    <div class="auth-right">
+
+        <div class="auth-box">
+
+            <a href="home.html" class="back-home">
+                ← Back to Home
+            </a>
+
+
+            <!-- TABS -->
+
+            <div class="auth-tabs" id="authTabs">
+
+                <button type="button" id="signinTab">
+                    Sign In
+                </button>
+
+                <button type="button" id="signupTab">
+                    Sign Up
+                </button>
+
+            </div>
+
+
+            <!-- MESSAGE AREA -->
+
+            <div id="messageBox" hidden></div>
+
+
+            <!-- SIGN IN -->
+
+            <form id="signinForm" method="POST" action="/login">
+
+                <input type="hidden" name="action" value="signin">
+
+                <h2>Welcome Back!</h2>
+
+                <p class="subtitle">
+                    Sign in to your FoodKart account.
+                </p>
+
+                <label for="signinEmail">Email Address</label>
+
+                <input
+                    type="email"
+                    id="signinEmail"
+                    name="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+                <label for="signinPassword">Password</label>
+
+                <input
+                    type="password"
+                    id="signinPassword"
+                    name="password"
+                    placeholder="Enter your password"
+                    required
+                >
+
+                <div class="forgot-link">
+
+                    <a href="#" id="forgotPasswordLink">
+                        Forgot Password?
+                    </a>
+
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    Sign In
+                </button>
+
+                <p class="switch-text">
+                    Don't have an account?
+                    <a href="#" id="showSignup">Sign Up</a>
+                </p>
+
+            </form>
+
+
+            <!-- FORGOT PASSWORD - EMAIL -->
+
+            <form id="forgotPasswordForm" method="POST"
+                  action="/login" hidden>
+
+                <input type="hidden" name="action" value="forgot_password">
+
+                <h2>Forgot Password?</h2>
+
+                <p class="subtitle">
+                    Enter your registered email address to receive a reset OTP.
+                </p>
+
+                <label for="forgotEmail">Email Address</label>
+
+                <input
+                    type="email"
+                    id="forgotEmail"
+                    name="email"
+                    placeholder="Enter your registered email"
+                    required
+                >
+
+                <button type="submit" class="submit-btn">
+                    Send Reset OTP
+                </button>
+
+                <p class="switch-text">
+                    Remember your password?
+                    <a href="#" id="backToSignin">Back to Sign In</a>
+                </p>
+
+            </form>
+
+
+            <!-- FORGOT PASSWORD - VERIFY OTP -->
+
+            <form id="verifyResetForm" method="POST"
+                  action="/login" hidden>
+
+                <input type="hidden" name="action" value="verify_reset_otp">
+
+                <h2>Verify Reset OTP</h2>
+
+                <p class="subtitle">
+                    Enter the 6-digit OTP sent to your registered email.
+                </p>
+
+                <div class="otp-info">
+
+                    <strong>Password reset verification</strong><br>
+
+                    Your OTP is valid for 5 minutes.
+                    Check your inbox or spam folder.
+
+                </div>
+
+                <label for="resetOtp">Reset OTP</label>
+
+                <input
+                    type="text"
+                    id="resetOtp"
+                    name="reset_otp"
+                    placeholder="Enter 6-digit OTP"
+                    inputmode="numeric"
+                    pattern="[0-9]{6}"
+                    minlength="6"
+                    maxlength="6"
+                    autocomplete="one-time-code"
+                    required
+                >
+
+                <button type="submit" class="submit-btn">
+                    Verify OTP
+                </button>
+
+                <p class="switch-text">
+
+                    <a href="#" id="backToForgotEmail">
+                        Change email address
+                    </a>
+
+                </p>
+
+            </form>
+
+
+            <!-- NEW PASSWORD -->
+
+            <form id="resetPasswordForm" method="POST"
+                  action="/login" hidden>
+
+                <input type="hidden" name="action" value="reset_password">
+
+                <h2>Create New Password</h2>
+
+                <p class="subtitle">
+                    Your OTP is verified. Enter your new password below.
+                </p>
+
+                <label for="newPassword">New Password</label>
+
+                <input
+                    type="password"
+                    id="newPassword"
+                    name="new_password"
+                    placeholder="Enter new password"
+                    minlength="6"
+                    required
+                >
+
+                <label for="confirmPassword">Confirm New Password</label>
+
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    name="confirm_password"
+                    placeholder="Confirm new password"
+                    minlength="6"
+                    required
+                >
+
+                <button type="submit" class="submit-btn">
+                    Reset Password
+                </button>
+
+            </form>
+
+
+            <!-- SIGN UP -->
+
+            <form id="signupForm" method="POST"
+                  action="/login" hidden>
+
+                <input type="hidden" name="action" value="send_otp">
+
+                <h2>Create Account</h2>
+
+                <p class="subtitle">
+                    Join FoodKart and order your favourite food.
+                </p>
+
+                <label for="signupName">Full Name</label>
+
+                <input
+                    type="text"
+                    id="signupName"
+                    name="name"
+                    placeholder="Enter your full name"
+                    required
+                >
+
+                <label for="signupEmail">Email Address</label>
+
+                <input
+                    type="email"
+                    id="signupEmail"
+                    name="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+                <label for="signupPhone">Phone Number</label>
+
+                <input
+                    type="tel"
+                    id="signupPhone"
+                    name="phone"
+                    placeholder="10-digit phone number"
+                    pattern="[6-9][0-9]{9}"
+                    maxlength="10"
+                    minlength="10"
+                    required
+                >
+
+                <label for="signupPassword">Password</label>
+
+                <input
+                    type="password"
+                    id="signupPassword"
+                    name="password"
+                    placeholder="Create a password"
+                    minlength="6"
+                    required
+                >
+
+                <button type="submit" class="submit-btn">
+                    Send Email OTP
+                </button>
+
+                <p class="switch-text">
+                    Already have an account?
+                    <a href="#" id="showSignin">Sign In</a>
+                </p>
+
+            </form>
+
+
+            <!-- SIGNUP OTP VERIFICATION -->
+
+            <form id="verifyForm" method="POST"
+                  action="/login" hidden>
+
+                <input type="hidden" name="action" value="verify_otp">
+
+                <h2>Verify Your Email</h2>
+
+                <p class="subtitle">
+                    Verify your email address to create your FoodKart account.
+                </p>
+
+                <div class="otp-info">
+
+                    <strong>Email verification</strong><br>
+
+                    A 6-digit OTP has been sent to your registered email.
+                    Your OTP is valid for 5 minutes.
+
+                </div>
+
+                <label for="email_otp">Email OTP</label>
+
+                <input
+                    type="text"
+                    id="email_otp"
+                    name="email_otp"
+                    placeholder="Enter 6-digit email OTP"
+                    inputmode="numeric"
+                    pattern="[0-9]{6}"
+                    minlength="6"
+                    maxlength="6"
+                    autocomplete="one-time-code"
+                    required
+                >
+
+                <button type="submit" class="submit-btn">
+                    Verify Email OTP & Create Account
+                </button>
+
+                <button
+                    type="submit"
+                    form="resendForm"
+                    id="resendOtpBtn"
+                    class="resend-otp-btn"
+                    disabled
+                >
+                    Resend OTP in 15s
+                </button>
+
+                <p class="switch-text">
+                    Wrong details?
+                    <a href="login.html">Start Again</a>
+                </p>
+
+            </form>
+
+
+            <!-- RESEND OTP -->
+
+            <form id="resendForm" method="POST"
+                  action="/login" hidden>
+
+                <input type="hidden" name="action" value="resend_otp">
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- JAVASCRIPT -->
+
+<script>
+
+    // ==================== ELEMENTS ====================
+
+    const signinTab = document.getElementById("signinTab");
+    const signupTab = document.getElementById("signupTab");
+    const authTabs = document.getElementById("authTabs");
+
+    const signinForm = document.getElementById("signinForm");
+    const signupForm = document.getElementById("signupForm");
+    const verifyForm = document.getElementById("verifyForm");
+
+    const forgotPasswordForm = document.getElementById("forgotPasswordForm");
+    const verifyResetForm = document.getElementById("verifyResetForm");
+    const resetPasswordForm = document.getElementById("resetPasswordForm");
+
+    const resendOtpBtn = document.getElementById("resendOtpBtn");
+
+    const messageBox = document.getElementById("messageBox");
+
+
+    // ==================== HIDE ALL FORMS ====================
+
+    function hideAllForms() {
+
+        signinForm.hidden = true;
+        signupForm.hidden = true;
+        verifyForm.hidden = true;
+
+        forgotPasswordForm.hidden = true;
+        verifyResetForm.hidden = true;
+        resetPasswordForm.hidden = true;
+
+    }
+
+
+    // ==================== UPDATE TABS ====================
+
+    function updateTabs(activeTab) {
+
+        authTabs.hidden = false;
+
+        signinTab.classList.toggle("active", activeTab === "signin");
+
+        signupTab.classList.toggle("active", activeTab === "signup");
+
+    }
+
+
+    // ==================== SHOW SIGN IN ====================
+
+    function showSignin() {
+
+        hideAllForms();
+
+        signinForm.hidden = false;
+
+        updateTabs("signin");
+
+    }
+
+
+    // ==================== SHOW SIGN UP ====================
+
+    function showSignup() {
+
+        hideAllForms();
+
+        signupForm.hidden = false;
+
+        updateTabs("signup");
+
+    }
+
+
+    // ==================== SHOW SIGNUP OTP ====================
+
+    function showVerification() {
+
+        hideAllForms();
+
+        verifyForm.hidden = false;
+
+        updateTabs("signup");
+
+        startResendCountdown();
+
+    }
+
+
+    // ==================== FORGOT PASSWORD ====================
+
+    function showForgotPassword() {
+
+        hideAllForms();
+
+        forgotPasswordForm.hidden = false;
+
+        authTabs.hidden = true;
+
+    }
+
+
+    // ==================== RESET OTP ====================
+
+    function showResetVerification() {
+
+        hideAllForms();
+
+        verifyResetForm.hidden = false;
+
+        authTabs.hidden = true;
+
+    }
+
+
+    // ==================== NEW PASSWORD ====================
+
+    function showNewPassword() {
+
+        hideAllForms();
+
+        resetPasswordForm.hidden = false;
+
+        authTabs.hidden = true;
+
+    }
+
+
+    // ==================== TAB EVENTS ====================
+
+    signinTab.addEventListener("click", showSignin);
+
+    signupTab.addEventListener("click", showSignup);
+
+
+    // ==================== SWITCH LINKS ====================
+
+    document.getElementById("showSignup").addEventListener("click", function(e) {
+
+        e.preventDefault();
+
+        showSignup();
+
+    });
+
+
+    document.getElementById("showSignin").addEventListener("click", function(e) {
+
+        e.preventDefault();
+
+        showSignin();
+
+    });
+
+
+    // ==================== FORGOT PASSWORD LINKS ====================
+
+    document.getElementById("forgotPasswordLink").addEventListener("click", function(e) {
+
+        e.preventDefault();
+
+        showForgotPassword();
+
+    });
+
+
+    document.getElementById("backToSignin").addEventListener("click", function(e) {
+
+        e.preventDefault();
+
+        showSignin();
+
+    });
+
+
+    document.getElementById("backToForgotEmail").addEventListener("click", function(e) {
+
+        e.preventDefault();
+
+        showForgotPassword();
+
+    });
+
+
+    // ==================== PAGE INITIALIZATION ====================
+
+    const params = new URLSearchParams(window.location.search);
+
+    const currentStep = params.get("step");
+
+    if (currentStep === "verify-signup") {
+
+        showVerification();
+
+    } else if (currentStep === "reset-otp") {
+
+        showResetVerification();
+
+    } else if (currentStep === "new-password") {
+
+        showNewPassword();
+
+    } else {
+
+        showSignin();
+
+    }
+
+
+    // ==================== OTP RESEND COUNTDOWN ====================
+
+    let resendTimer;
+
+    let remainingSeconds = 15;
+
+    function startResendCountdown() {
+
+        clearInterval(resendTimer);
+
+        remainingSeconds = 15;
+
+        resendOtpBtn.disabled = true;
+
+        resendOtpBtn.textContent = `Resend OTP in ${remainingSeconds}s`;
+
+        resendTimer = setInterval(function() {
+
+            remainingSeconds--;
+
+            if (remainingSeconds > 0) {
+
+                resendOtpBtn.textContent = `Resend OTP in ${remainingSeconds}s`;
+
+            } else {
+
+                clearInterval(resendTimer);
+
+                resendOtpBtn.disabled = false;
+
+                resendOtpBtn.textContent = "Resend Email OTP";
+
+            }
+
+        }, 1000);
+
+    }
+
+
+    // ==================== PASSWORD CONFIRMATION ====================
+
+    resetPasswordForm.addEventListener("submit", function(e) {
+
+        const password = document.getElementById("newPassword").value;
+
+        const confirmPassword = document.getElementById("confirmPassword").value;
+
+        if (password !== confirmPassword) {
+
+            e.preventDefault();
+
+            alert("Passwords do not match.");
+
+        }
+
+    });
+
+
+    // ==================== OTP INPUT VALIDATION ====================
+
+    const otpInputs = [
+
+        document.getElementById("email_otp"),
+
+        document.getElementById("resetOtp")
+
+    ];
+
+    otpInputs.forEach(function(input) {
+
+        input.addEventListener("input", function() {
+
+            this.value = this.value.replace(/[^0-9]/g, "").slice(0, 6);
+
+        });
+
+    });
+
+
+    // ==================== PHONE VALIDATION ====================
+
+    const phoneInput = document.getElementById("signupPhone");
+
+    phoneInput.addEventListener("input", function() {
+
+        this.value = this.value.replace(/[^0-9]/g, "").slice(0, 10);
+
+    });
+
+
+    // ==================== DISPLAY BACKEND MESSAGES ====================
+
+    const message = params.get("message");
+
+    const messageType = params.get("type");
+
+    if (message) {
+
+        messageBox.hidden = false;
+
+        messageBox.className =
+            messageType === "error" ? "error-message" : "success-message";
+
+        messageBox.textContent = message;
+
+    }
+
+</script>
+
+</body>
+</html>
