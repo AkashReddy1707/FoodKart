@@ -671,6 +671,7 @@ if (restaurantSearch) {
         });
 
         // Display suggestions
+        searchSuggestions.innerHTML = "";
         suggestions.forEach(item => {
             const option = document.createElement("div");
             option.className = "search-suggestion";
@@ -699,8 +700,17 @@ if (restaurantSearch) {
             searchSuggestions.appendChild(option);
         });
 
-        searchSuggestions.style.display =
-            suggestions.length > 0 ? "block" : "none";
+        if (suggestions.length > 0) {
+            searchSuggestions.style.display = "block";
+        } else {
+            const emptyMessage = document.createElement("p");
+
+            emptyMessage.textContent =
+                    "No matching restaurants or food found.";
+
+            searchSuggestions.appendChild(emptyMessage);
+            searchSuggestions.style.display = "block";
+        }
 
         // Filter restaurants while typing
         document.querySelectorAll(".restaurant-card").forEach(card => {
